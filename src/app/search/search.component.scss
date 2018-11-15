@@ -1,0 +1,15 @@
+.searchBox {
+  width: 75%;
+  height: 100px;
+  border: 1px solid black;
+  margin: auto;
+}
+
+.searchForm {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-group {
+  width: 20%;
+}
