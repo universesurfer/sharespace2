@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from '../environments/environment';
@@ -11,6 +12,7 @@ import { MainComponent } from './main/main.component';
 import { ResultsComponent } from './results/results.component';
 import { MapComponent } from './map/map.component';
 import { SearchComponent } from './search/search.component';
+import { BsDatepickerModule, BsDropdownModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -23,7 +25,10 @@ import { SearchComponent } from './search/search.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
+    BsDatepickerModule.forRoot(),
+    BsDropdownModule.forRoot(),
     routing,
     AgmCoreModule.forRoot({
       apiKey: environment.GOOGLE_MAPS_API_KEY,

@@ -10,10 +10,14 @@ import { MapsAPILoader } from '@agm/core';
 })
 export class SearchComponent implements OnInit {
 
+ dateRangeValue: Date[];
+
+
+ //Google Location Search
  public latitude: number;
  public longitude: number;
  public searchControl: FormControl;
- public zoom: number;
+ // public zoom: number;
 
  @ViewChild("search")
    public searchElementRef: ElementRef;
@@ -25,9 +29,9 @@ export class SearchComponent implements OnInit {
 
    ngOnInit() {
      //set google maps defaults
-     this.zoom = 4;
-     this.latitude = 39.8282;
-     this.longitude = -98.5795;
+     // this.zoom = 4;
+     // this.latitude = 39.8282;
+     // this.longitude = -98.5795;
 
      //create search FormControl
      this.searchControl = new FormControl();
@@ -50,10 +54,9 @@ export class SearchComponent implements OnInit {
            //set latitude, longitude and zoom
            this.latitude = place.geometry.location.lat();
            this.longitude = place.geometry.location.lng();
-           this.zoom = 12;
+           // this.zoom = 12;
          });
        });
      });
    }
    }
- }
