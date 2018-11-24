@@ -11,6 +11,7 @@ import { MapsAPILoader } from '@agm/core';
 export class SearchComponent implements OnInit {
 
  dateRangeValue: Date[];
+ guestCount: number = 0;
 
 
  //Google Location Search
@@ -59,4 +60,28 @@ export class SearchComponent implements OnInit {
        });
      });
    }
+
+
+   subtractGuest() {
+     if (this.guestCount > 0) {
+       this.guestCount--
+     }
+     console.log(this.guestCount)
+   }
+
+   addGuest() {
+     this.guestCount++
+     console.log(this.guestCount)
+   }
+
+
+
+getHomeAwayData() {
+  
+}
+
+
+
+
+
    }

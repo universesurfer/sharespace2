@@ -1,5 +1,6 @@
 require('dotenv').config()
 var createError = require('http-errors');
+const cors = require('cors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -14,6 +15,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.use(cors());
+app.options('*', cors());
 
 mongoose.connect('mongodb://localhost:27017/sharespace', { useNewUrlParser: true });
 

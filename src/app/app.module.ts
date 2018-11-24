@@ -12,7 +12,8 @@ import { MainComponent } from './main/main.component';
 import { ResultsComponent } from './results/results.component';
 import { MapComponent } from './map/map.component';
 import { SearchComponent } from './search/search.component';
-import { BsDatepickerModule, BsDropdownModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, BsDropdownModule, ButtonsModule } from 'ngx-bootstrap';
+
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { BsDatepickerModule, BsDropdownModule } from 'ngx-bootstrap';
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
+    ButtonsModule.forRoot(),
     routing,
     AgmCoreModule.forRoot({
       apiKey: environment.GOOGLE_MAPS_API_KEY,

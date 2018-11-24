@@ -15,10 +15,37 @@
         <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="dateRangeValue">
       </fieldset>
 
+      <fieldset>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="guests">Guests</label> <br/>
+        <div class="btn-group" dropdown>
+          <button id="button-custom-html" dropdownToggle type="button" class="btn dropdown-toggle"
+                  aria-controls="dropdown-custom-html">
+            {{guestCount}} <span class="caret"></span>
+          </button>
+          <ul id="dropdown-custom-html" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="button-custom-html">
+            <!-- <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li> -->
+            <li role="menuitem" class="guestCountDropdown">
+              <button type="button" name="button" class="plusMinusButton" (click)="$event.stopPropagation(); subtractGuest()"> - </button>
+              <div class="guestCountBox"> {{guestCount}} </div>
+              <button type="button" name="button" class="plusMinusButton" (click)="$event.stopPropagation(); addGuest()"> + </button>
+            </li>
+            <li>
+                <a href="#">Done</a>
+            </li>
+
+          </ul>
+        </div>
+      </fieldset>
 
 
 
-      <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+
+      <button type="submit" class="btn btn-primary" (click)="getHomeAwayData()">Get HomeAway Data</button>
     </div>
 
 </div>
