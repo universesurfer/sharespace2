@@ -5,7 +5,6 @@ const axios = require('axios')
 
 
 const token = process.env.ACCESS_TOKEN;  //HomeAway token from .env
-// const token = 'MjgwY2IxZTYtYzIxZC00ZjNkLTgwNDctYTI3Y2Y1MDFmNGU3';
 
 let searchURL = 'https://ws.homeaway.com/public/search'
 
@@ -17,9 +16,16 @@ var options = {
   dataType: 'json'
 };
 
-// var params = {
-//
-// }
+var params = {
+  availabilityStart: '',
+  availabilityEnd: '',
+  minSleeps: '',
+  centerPointLatitude: '',
+  centerPointLongitude: '',
+  distanceInKm: ''
+  // centerPointLatitude + Longitude uses a proximity search to limit results to listings located within a max distance from a specific location, must be sent with centerPointLatitude and centerPointLongitude
+
+}
 
 function search() {
   console.log('token', token)
