@@ -7,12 +7,12 @@
   <div class="searchBox form-row">
       <fieldset class="form-group">
         <label for="location">Location</label>
-        <input type="" class="form-control" id="location" placeholder="Enter location" #search >
+        <input type="" class="form-control" id="location" placeholder="Enter location" #search required>
       </fieldset>
 
       <fieldset class="form-group">
         <label for="datepicker">Dates</label>
-        <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="dateRangeValue">
+        <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="daterangepickerModel" (bsValueChange)="onValueChange($event)" [bsConfig]="{ rangeInputFormat: 'yyyy-MM-dd' }" required>
       </fieldset>
 
       <fieldset>

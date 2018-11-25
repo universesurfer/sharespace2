@@ -13,6 +13,7 @@ const http = require('http');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var homeAwayRouter = require('./routes/homeaway');
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/homeaway', homeAwayRouter);
 
 
 //Catch all other routes and return the index file.

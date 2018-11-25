@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -26,6 +28,7 @@ import { BsDatepickerModule, BsDropdownModule, ButtonsModule } from 'ngx-bootstr
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
@@ -37,7 +40,7 @@ import { BsDatepickerModule, BsDropdownModule, ButtonsModule } from 'ngx-bootstr
       libraries: ["places"]
     })
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
