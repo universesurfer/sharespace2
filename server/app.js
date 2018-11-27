@@ -6,7 +6,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const http = require('http');
 
 
@@ -17,8 +17,10 @@ var homeAwayRouter = require('./routes/homeaway');
 
 var app = express();
 
+
 app.use(cors());
 app.options('*', cors());
+// app.options('*', cors(corsOptions));
 
 mongoose.connect('mongodb://localhost:27017/sharespace', { useNewUrlParser: true });
 

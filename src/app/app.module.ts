@@ -7,7 +7,9 @@ import { NgModule } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from '../environments/environment';
 
+import { HomeawayService } from './homeaway.service'
 
+import { RouterModule } from "@angular/router";
 import { routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -28,19 +30,21 @@ import { BsDatepickerModule, BsDropdownModule, ButtonsModule } from 'ngx-bootstr
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    RouterModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
+    routing,
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     ButtonsModule.forRoot(),
-    routing,
+
     AgmCoreModule.forRoot({
       apiKey: environment.GOOGLE_MAPS_API_KEY,
       libraries: ["places"]
     })
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, HomeawayService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

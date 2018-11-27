@@ -1,54 +1,53 @@
 'use strict';
-
 require('dotenv').config({path: '../.env'})
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 let https = require('https')
 const axios = require('axios')
+var mongoose = require('mongoose');
+
 const token = process.env.ACCESS_TOKEN;  //HomeAway token from .env
 
 let searchURL = 'https://ws.homeaway.com/public/search'
 
 
-
-var options = {
+let options = {
   method: 'GET',
   headers: {'Authorization': 'Bearer ' + token },
   dataType: 'json'
 };
 
 
+router.get('/search', (req,res,next)  => {
 
 
-router.get('/response', function(req,res,next) {
+    //
+    let params = {
+      availabilityStart: req.query.availabilityStart,
+      availabilityEnd: req.query.availabilityEnd,
+      minSleeps: req.query.minSleeps,
+      centerPointLatitude: req.query.centerPointLatitude,
+      centerPointLongitude: req.query.centerPointLongitude,
+      distanceInKm: req.query.distanceInKm
+      // centerPointLatitude + Longitude uses a proximity search to limit results to listings located within a max distance from a specific location, must be sent with centerPointLatitude and centerPointLongitude
+    }
 
-  let params = {
-    availabilityStart: req.query.trip.availabilityStart,
-    availabilityEnd: req.query.trip.availabilityEnd,
-    minSleeps: req.query.trip.minSleeps,
-    centerPointLatitude: req.query.trip.centerPointLatitude,
-    centerPointLongitude: req.query.trip.centerPointLongitude,
-    distanceInKm: '50'
-    // centerPointLatitude + Longitude uses a proximity search to limit results to listings located within a max distance from a specific location, must be sent with centerPointLatitude and centerPointLongitude
-  }
+      // console.log('getting params from server', params)
 
-  axios.get(searchURL, options, params)
-    .then(function (response) {
-      console.log('Successful HomeAway search in server /search', response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+    axios.get(searchURL, options, params)
+      .then(function (response) {
+        console.log('Successful HomeAway search in server /search', response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
 
 
-  // res.json({
-  //   'status': 200,
-  //   'msg': 'success'
-  // });
-});
+  });
+
 
 
 
@@ -81,3 +80,4 @@ router.get('/response', function(req,res,next) {
 //     console.log(result);
 //   }
 // });
+module.exports = router;

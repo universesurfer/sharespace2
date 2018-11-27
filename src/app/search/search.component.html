@@ -12,7 +12,7 @@
 
       <fieldset class="form-group">
         <label for="datepicker">Dates</label>
-        <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="daterangepickerModel" (bsValueChange)="onValueChange($event)" [bsConfig]="{ rangeInputFormat: 'yyyy-MM-dd' }" required>
+        <input class="form-control" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="daterangepickerModel" (ngModelChange)="onValueChange($event)" required>
       </fieldset>
 
       <fieldset>

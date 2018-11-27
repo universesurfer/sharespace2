@@ -3,8 +3,11 @@ import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
 import { HomeawayService } from '../homeaway.service';
-import { format } from 'date-fns'
+import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router'
+import { map } from 'rxjs/operators';
+
 
 
 @Component({
@@ -34,7 +37,8 @@ export class SearchComponent implements OnInit {
      private mapsAPILoader: MapsAPILoader,
      private ngZone: NgZone,
      private homeAwayService: HomeawayService,
-     private datePipe: DatePipe
+     private datePipe: DatePipe,
+     private router: Router
    ) {}
 
    ngOnInit() {
@@ -88,11 +92,16 @@ export class SearchComponent implements OnInit {
    onValueChange(value: Date[]): void {
      this.daterangepickerModel = value
      console.log(this.daterangepickerModel);
-     let dateStart = new Date(this.daterangepickerModel.slice(0, 1).toString())
-     let dateEnd = new Date (this.daterangepickerModel.slice(1).toString())
 
-     this.startDate = this.datePipe.transform(dateStart, 'yyyy-MM-dd');
-     this.endDate = this.datePipe.transform(dateEnd, 'yyyy-MM-dd');
+     if (this.daterangepickerModel != null) {
+       let dateStart = new Date(this.daterangepickerModel.slice(0, 1).toString())
+       let dateEnd = new Date (this.daterangepickerModel.slice(1).toString())
+
+       this.startDate = this.datePipe.transform(dateStart, 'yyyy-MM-dd');
+       this.endDate = this.datePipe.transform(dateEnd, 'yyyy-MM-dd');
+     }
+
+
   }
 
 
@@ -114,20 +123,31 @@ export class SearchComponent implements OnInit {
 
 
 getHomeAwayData() {
-  console.log('dates', this.startDate, this.endDate);
+  // console.log('dates', this.startDate, this.endDate);
+  // //
+  // const trip = {
+  //   availabilityStart: this.startDate,
+  //   availabilityEnd: this.endDate,
+  //   minSleeps: this.guestCount,
+  //   centerPointLatitude: this.latitude ,
+  //   centerPointLongitude: this.longitude
+  // }
 
-  const trip = {
-    availabilityStart: this.startDate,
-    availabilityEnd: this.endDate,
-    minSleeps: this.guestCount,
-    centerPointLatitude: this.latitude ,
-    centerPointLongitude: this.longitude
-  }
+  this.router.navigate([`/homeaway/search`],
+     { queryParams : {
+           availabilityStart: this.startDate,
+           availabilityEnd: this.endDate,
+           minSleeps: this.guestCount,
+           centerPointLatitude: this.latitude,
+           centerPointLongitude: this.longitude,
+           distanceInKm: '50'
+         }
+     })
 
-    this.homeAwayService.searchListings(trip)
-  }
+    // this.homeAwayService.searchListings(trip)
+    // .subscribe((res: Response) => {
+    //   this.router.navigate([`/search`]
+    // })
 
-
-
-
-   }
+}
+}
