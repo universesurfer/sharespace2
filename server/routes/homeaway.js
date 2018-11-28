@@ -10,7 +10,6 @@ const token = process.env.ACCESS_TOKEN;  //HomeAway token from .env
 
 let searchURL = 'https://ws.homeaway.com/public/search'
 
-
 let options = {
   method: 'GET',
   headers: {'Authorization': 'Bearer ' + token },
@@ -20,8 +19,6 @@ let options = {
 
 router.get('/search', (req,res,next)  => {
 
-
-    //
     let params = {
       availabilityStart: req.query.availabilityStart,
       availabilityEnd: req.query.availabilityEnd,
@@ -31,8 +28,6 @@ router.get('/search', (req,res,next)  => {
       distanceInKm: req.query.distanceInKm
       // centerPointLatitude + Longitude uses a proximity search to limit results to listings located within a max distance from a specific location, must be sent with centerPointLatitude and centerPointLongitude
     }
-
-      // console.log('getting params from server', params)
 
     axios.get(searchURL, options, params)
       .then(function (response) {
@@ -51,33 +46,6 @@ router.get('/search', (req,res,next)  => {
 
 
 
-// function search() {
-//   console.log('token', token)
-//
-//   axios.get(searchURL, options)
-//     .then(function (response) {
-//       console.log(response);
-//     })
-//     .catch(function (error) {
-//       console.log(error);
-//     })
-//     .then(function () {
-//       // always executed
-//     });
-//
-// }
-//
-// search()
 
 
-
-
-// searchHomes(options, function(err, result) {
-//   if(err) {
-//     return console.log('An error occurred while making api request to search homes');
-//   }
-//   else {
-//     console.log(result);
-//   }
-// });
 module.exports = router;

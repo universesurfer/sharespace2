@@ -68,11 +68,20 @@ export class SearchComponent implements OnInit {
            //set latitude, longitude and zoom
            this.latitude = place.geometry.location.lat();
            this.longitude = place.geometry.location.lng();
-           // this.zoom = 12;
+           this.newCoordinates()
+
          });
        });
      });
    }
+
+   //Updates HomeAway Service with new location coordinates, which will then be sent to map component.
+   newCoordinates() {
+    this.homeAwayService.changeCoordinates({
+        latitude: this.latitude,
+        longitude: this.longitude
+      })
+  }
 
 
    subtractGuest() {
@@ -105,34 +114,8 @@ export class SearchComponent implements OnInit {
   }
 
 
-   // onSearch() {
-   //   const trip = {
-   //     location: this.searchForm.value.location,
-   //     dates: this.searchForm.value.dates,
-   //     guests: this.searchForm.value.guests
-   //   }
-   //
-   //   console.log('trip', trip);
-   //       this.homeAwayService.searchParams(trip)
-   //           // .subscribe(
-   //           //   data => console.log(data),
-   //           //   error => console.error(error)
-   //           // );
-   //       this.searchForm.reset();
-   //   }
-
 
 getHomeAwayData() {
-  // console.log('dates', this.startDate, this.endDate);
-  // //
-  // const trip = {
-  //   availabilityStart: this.startDate,
-  //   availabilityEnd: this.endDate,
-  //   minSleeps: this.guestCount,
-  //   centerPointLatitude: this.latitude ,
-  //   centerPointLongitude: this.longitude
-  // }
-
   this.router.navigate([`/homeaway/search`],
      { queryParams : {
            availabilityStart: this.startDate,
@@ -140,14 +123,11 @@ getHomeAwayData() {
            minSleeps: this.guestCount,
            centerPointLatitude: this.latitude,
            centerPointLongitude: this.longitude,
-           distanceInKm: '50'
+           distanceInKm: '10'
          }
      })
-
-    // this.homeAwayService.searchListings(trip)
-    // .subscribe((res: Response) => {
-    //   this.router.navigate([`/search`]
-    // })
-
 }
+
+
+
 }

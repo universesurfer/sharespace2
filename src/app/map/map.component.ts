@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
+import { HomeawayService } from '../homeaway.service';
 
 @Component({
   selector: 'app-map',
@@ -8,12 +9,27 @@ import { AgmCoreModule } from '@agm/core';
 })
 export class MapComponent implements OnInit {
 
-  constructor() { }
+  coordinates: any = {
+    latitude: Number,
+    longitude: Number
+  };
+
+  latitude: Number;
+  longitude: Number;
+
+  constructor(
+    private homeAwayService: HomeawayService
+  ) { }
 
   ngOnInit() {
+
+    this.homeAwayService.currentCoordinates.subscribe(coordinates => this.coordinates = coordinates)
+    this.latitude = this.coordinates.latitude
+    this.longitude = this.coordinates.longitude
+    console.log("getting current coordinates", this.coordinates)
   }
 
-  latitude = 51.678418
-  longitude = 7.809007
+  // latitude = 51.678418
+  // longitude = 7.809007
 
 }
