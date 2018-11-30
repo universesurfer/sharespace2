@@ -17,6 +17,8 @@ let options = {
 };
 
 
+// NOTE: Add error handling to requests
+
 router.get('/search', (req,res,next)  => {
 
     let params = {
@@ -32,13 +34,14 @@ router.get('/search', (req,res,next)  => {
     axios.get(searchURL, options, params)
       .then(function (response) {
         console.log('Successful HomeAway search in server /search', response);
+        res.send(response.data); //Send data
       })
       .catch(function (error) {
         console.log(error);
       })
-      .then(function () {
-        // always executed
-      });
+      // .then(function () {
+      //   // always executed
+      // });
 
 
   });

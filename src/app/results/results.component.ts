@@ -20,15 +20,21 @@ export class ResultsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.activatedRoute.queryParams.subscribe((params) => {
+    // this.homeAwayService.retrieveRentalsFromService(this.homeAwayService.rentals);
+    console.log("getting rentals", this.homeAwayService.rentals)
+
+
+    this.activatedRoute.queryParams.subscribe(params => {
          console.log('params', params)
-         this.homeAwayService.searchListings(params)
-           .subscribe((res) => {
-             console.log(res)
-             console.log(params.trip)
-         });
+         this.homeAwayService.searchListings(params).subscribe(res =>
+             console.log("response in activatedRoute in results", res)
+         );
   })
 }
+
+// .subscribe(data => console.log(data));
+
+
 
 
 }

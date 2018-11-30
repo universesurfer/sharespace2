@@ -39,6 +39,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist')));
 
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/homeaway', homeAwayRouter);
@@ -48,9 +50,9 @@ app.use('/homeaway', homeAwayRouter);
 //Catch-all route MUST come after all other API routes have been defined.
 
 // NOTE: Concurrently is currently serving Angular through Express app for development.
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 // Get port from environment and store in Express
 const port = process.env.PORT || '3000';
