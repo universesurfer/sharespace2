@@ -116,7 +116,7 @@ export class SearchComponent implements OnInit {
 
 
 getHomeAwayData() {
-  this.router.navigate([`/homeaway/search`],
+  this.router.navigate([`/search`],
      { queryParams : {
            availabilityStart: this.startDate,
            availabilityEnd: this.endDate,

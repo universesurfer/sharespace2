@@ -18,6 +18,8 @@ import { MapComponent } from './map/map.component';
 import { SearchComponent } from './search/search.component';
 import { BsDatepickerModule, BsDropdownModule, ButtonsModule } from 'ngx-bootstrap';
 
+import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common'
+
 
 
 @NgModule({
@@ -44,7 +46,7 @@ import { BsDatepickerModule, BsDropdownModule, ButtonsModule } from 'ngx-bootstr
       libraries: ["places"]
     })
   ],
-  providers: [DatePipe, HomeawayService],
+  providers: [DatePipe, HomeawayService, Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,7 +19,7 @@ let options = {
 
 // NOTE: Add error handling to requests
 
-router.get('/search', (req,res,next)  => {
+router.get('/searchListings', (req,res,next)  => {
 
     let params = {
       availabilityStart: req.query.availabilityStart,
@@ -42,7 +42,6 @@ router.get('/search', (req,res,next)  => {
       // .then(function () {
       //   // always executed
       // });
-
 
   });
 

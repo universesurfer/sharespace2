@@ -15,11 +15,6 @@ import { throwError } from 'rxjs';
 })
 export class HomeawayService {
 
-  //HomeAway API Data
-  public rentals: Object;
-  // private homeAwayResults = new Rx.BehaviorSubject({});
-  // currentListings = this.homeAwayResults.asObservable();
-
 
   //BehaviorSubject captures new coordinates from search to provide map component
   private resultsCoordinates = new Rx.BehaviorSubject({});
@@ -38,7 +33,6 @@ export class HomeawayService {
   //Search HomeAway Listings
   searchListings(trip) {
     console.log("search listing", trip)
-    // const stringifiedParams = JSON.stringify(trip)
 
     //Grab all of the params from the trip argument and append them to params variable
     let params = new HttpParams()
@@ -54,22 +48,13 @@ export class HomeawayService {
       params: params
     }
 
-    return this.http.get(`/homeaway/search`, options)
+    return this.http.get(`/homeaway/searchListings`, options)
     .pipe(
       map((res: Response) => res),
       catchError(error => throwError(error.message || error))
       )
-      // .subscribe(res => console.log(res.json()))
-
 
   }
-
-
-  // retrieveRentalsFromService(rentals: Object) {
-  //   this.homeAwayResults.next(rentals)
-  //   console.log("getting rentals from retrieve function in service", this.homeAwayResults)
-  // }
-
 
 
 

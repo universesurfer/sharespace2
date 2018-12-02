@@ -5,9 +5,8 @@ import { MainComponent } from './main/main.component'
 
 
 const APP_ROUTES: Routes = [
-    // { path: 'auth', component: AuthenticationComponent, children: AUTH_ROUTES }
     { path: '', component: MainComponent },
-    { path: 'homeaway/search', component: ResultsComponent }
+    { path: 'search', component: ResultsComponent }
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

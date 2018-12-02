@@ -11,28 +11,30 @@ import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 })
 export class ResultsComponent implements OnInit {
 
+  public searchResults: any;
+
   constructor(
     private http: HttpClient,
     private homeAwayService: HomeawayService,
-    // private router: Router,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
 
-    // this.homeAwayService.retrieveRentalsFromService(this.homeAwayService.rentals);
-    console.log("getting rentals", this.homeAwayService.rentals)
-
-
+    //Query params-based search on page init
     this.activatedRoute.queryParams.subscribe(params => {
          console.log('params', params)
-         this.homeAwayService.searchListings(params).subscribe(res =>
-             console.log("response in activatedRoute in results", res)
-         );
+         this.homeAwayService.searchListings(params).subscribe((res) => {
+             this.searchResults = res
+             console.log("response in activatedRoute in results", this.searchResults)
+         });
   })
+
 }
 
-// .subscribe(data => console.log(data));
+
+
+
 
 
 
