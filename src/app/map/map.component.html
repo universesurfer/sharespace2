@@ -5,4 +5,6 @@
 
  <agm-map [zoom]='12' [latitude]="latitude" [longitude]="longitude">
 
+   <agm-marker *ngFor="let location of coordinates; let i = index" [latitude]="location.lat" [longitude]="location.lng"></agm-marker>
+
  </agm-map>

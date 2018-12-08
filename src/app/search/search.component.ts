@@ -68,7 +68,7 @@ export class SearchComponent implements OnInit {
            //set latitude, longitude and zoom
            this.latitude = place.geometry.location.lat();
            this.longitude = place.geometry.location.lng();
-           this.newCoordinates()
+           // this.newCoordinates()
 
          });
        });
@@ -76,12 +76,12 @@ export class SearchComponent implements OnInit {
    }
 
    //Updates HomeAway Service with new location coordinates, which will then be sent to map component.
-   newCoordinates() {
-    this.homeAwayService.changeCoordinates({
-        latitude: this.latitude,
-        longitude: this.longitude
-      })
-  }
+  //  newCoordinates() {
+  //   this.homeAwayService.changeCoordinates({
+  //       latitude: this.latitude,
+  //       longitude: this.longitude
+  //     })
+  // }
 
 
    subtractGuest() {
@@ -123,7 +123,8 @@ getHomeAwayData() {
            minSleeps: this.guestCount,
            centerPointLatitude: this.latitude,
            centerPointLongitude: this.longitude,
-           distanceInKm: '10'
+           imageSize: 'LARGE',
+           distanceInKm: '10',
          }
      })
 }

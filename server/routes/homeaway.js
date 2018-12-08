@@ -19,6 +19,8 @@ let options = {
 
 // NOTE: Add error handling to requests
 
+//searchListings route matches the route we specify in our service method.
+//Our Angular routes should not match our Node routes.  Please see how the routes differ.
 router.get('/searchListings', (req,res,next)  => {
 
     let params = {
@@ -27,7 +29,8 @@ router.get('/searchListings', (req,res,next)  => {
       minSleeps: req.query.minSleeps,
       centerPointLatitude: req.query.centerPointLatitude,
       centerPointLongitude: req.query.centerPointLongitude,
-      distanceInKm: req.query.distanceInKm
+      distanceInKm: req.query.distanceInKm,
+      imageSize: req.query.imageSize
       // centerPointLatitude + Longitude uses a proximity search to limit results to listings located within a max distance from a specific location, must be sent with centerPointLatitude and centerPointLongitude
     }
 

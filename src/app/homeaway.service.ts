@@ -3,7 +3,7 @@ import { SearchComponent } from './search/search.component';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as Rx from "rxjs";
-import 'rxjs'
+// import 'rxjs'
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -17,16 +17,16 @@ export class HomeawayService {
 
 
   //BehaviorSubject captures new coordinates from search to provide map component
-  private resultsCoordinates = new Rx.BehaviorSubject({});
-  currentCoordinates = this.resultsCoordinates.asObservable();
+  private rentalResults = new Rx.BehaviorSubject({});
+  currentResults = this.rentalResults.asObservable();
 
   constructor(
     private http: HttpClient
   ) { }
 
-  // Method updates coordinates from search for map from results component
-  changeCoordinates(coordinates: Object) {
-    this.resultsCoordinates.next(coordinates)
+  // Method updates search results in results component to map
+  updateResults(results: Object) {
+    this.rentalResults.next(results)
   }
 
 

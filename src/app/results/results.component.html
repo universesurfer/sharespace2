@@ -5,8 +5,23 @@
 <div class="container-fluid">
   <div id="resultsRow">
 
-    <div id="listingsBox"> listing box </div>
-    <app-map></app-map>
+    <!-- Show our HomeAway listings -->
+    <div id="listingsBox"> listing box
+
+      <div class="listingCardWrapper" *ngFor="let listing of resultsAndParams.results">
+        <div class="listingPhoto">
+          <img src="{{listing.thumbnail.uri}}" alt="">
+        </div>
+        <div class="listingTitle"></div>
+        <div class="listingStats"></div>
+        <div class="listingPrice"></div>
+        <div class="listingRating"></div>
+      </div>
+
+
+
+    </div>
+    <app-map *ngIf="dataPresent"></app-map>
 
   </div>
 

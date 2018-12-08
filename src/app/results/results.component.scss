@@ -11,16 +11,27 @@
 
 
 #listingsBox {
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 100%;
-  background-color: darkgray;
+  // background-color:a;
 }
 
-// #mapContainer {
-//   width: 50%;
-// }
+.listingCardWrapper {
+  height: 250px;
+  width: 100%;
+  border: .5px solid black;
+}
 
 app-map {
   width: 50%;
+  height: 100%;
+}
+
+.listingPhoto img {
+  width: 35%;
+  object-fit: contain;
+  margin-left: 0;
   height: 100%;
 }

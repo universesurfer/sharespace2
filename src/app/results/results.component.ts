@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HomeawayService } from '../homeaway.service';
@@ -12,6 +12,16 @@ import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 export class ResultsComponent implements OnInit {
 
   public searchResults: any;
+  public searchParams: Object;
+
+  private dataPresent: boolean;
+
+
+  public resultsAndParams: Results = {
+    results: this.searchResults,
+    params: this.searchParams
+  }
+
 
   constructor(
     private http: HttpClient,
@@ -24,19 +34,32 @@ export class ResultsComponent implements OnInit {
     //Query params-based search on page init
     this.activatedRoute.queryParams.subscribe(params => {
          console.log('params', params)
-         this.homeAwayService.searchListings(params).subscribe((res) => {
-             this.searchResults = res
-             console.log("response in activatedRoute in results", this.searchResults)
+         this.resultsAndParams.params = params
+         this.homeAwayService.searchListings(params).subscribe(res => {
+             this.resultsAndParams.results = res["entries"]
+             this.newResults(this.resultsAndParams)
+             console.log("response in activatedRoute in results", this.resultsAndParams)
          });
   })
 
 }
 
+// NOTE: map not responding to changes in url
+
+// Update BehaviorSubject when data changes and subscribe it to local variable OnInit
+ newResults(data) {
+  this.homeAwayService.updateResults(data)
+  this.dataPresent = true;
+  console.log("newResults() function is firing")
+}
 
 
 
 
+}
 
-
-
+//Interface for results to expect results and params objects
+interface Results {
+  results: Object,
+  params: Object
 }
