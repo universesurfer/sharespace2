@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HomeawayService } from '../homeaway.service';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
@@ -13,6 +14,7 @@ export class ResultsComponent implements OnInit {
 
   public searchResults: any;
   public searchParams: Object;
+
 
   private dataPresent: boolean;
 

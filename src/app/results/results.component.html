@@ -12,10 +12,19 @@
         <div class="listingPhoto">
           <img src="{{listing.thumbnail.uri}}" alt="">
         </div>
-        <div class="listingTitle"></div>
-        <div class="listingStats"></div>
-        <div class="listingPrice"></div>
-        <div class="listingRating"></div>
+        <div class="listingStatsWrapper">
+          <div class="listingTitle"><h4>{{listing.headline}}</h4></div>
+          <div class="listingStats">{{listing.accommodations}}</div>
+
+          <div class="listingPriceRatingWrapper">
+            <div class="listingPrice">{{listing.priceQuote.averageNightly}}</div>
+            <div class="listingRating">
+              <star-rating size="medium" [starType]="icon" [rating]="listing.reviewAverage" [readOnly]="true"></star-rating>
+               ({{listing.reviewCount}})
+            </div>
+          </div>
+
+        </div>
       </div>
 
 

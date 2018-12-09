@@ -124,7 +124,7 @@ getHomeAwayData() {
            centerPointLatitude: this.latitude,
            centerPointLongitude: this.longitude,
            imageSize: 'LARGE',
-           distanceInKm: '10',
+           distanceInKm: '10'
          }
      })
 }

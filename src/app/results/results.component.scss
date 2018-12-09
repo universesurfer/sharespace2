@@ -1,3 +1,5 @@
+@import '~css-star-rating/scss/star-rating';
+
 .container-fluid {
   height: 100%;
 }
@@ -11,7 +13,6 @@
 
 
 #listingsBox {
-  display: flex;
   flex-direction: column;
   width: 50%;
   height: 100%;
@@ -19,19 +20,45 @@
 }
 
 .listingCardWrapper {
+  display: flex;
+  flex-direction: row;
   height: 250px;
   width: 100%;
   border: .5px solid black;
 }
+
+.listingStatsWrapper {
+  max-width: 65%;
+  display: flex;
+  flex-direction: column;
+}
+
+.listingStatsWrapper div {
+  width: 100%;
+}
+
+.listingPriceRatingWrapper {
+  flex-direction: row;
+
+}
+//
+// star-rating {
+//   width: 50px;
+// }
 
 app-map {
   width: 50%;
   height: 100%;
 }
 
-.listingPhoto img {
+.listingPhoto {
   width: 35%;
-  object-fit: contain;
+  height: 100%;
   margin-left: 0;
+}
+
+.listingPhoto img {
+  width: 100%;
+  object-fit: contain;
   height: 100%;
 }

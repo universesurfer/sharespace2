@@ -17,6 +17,7 @@ import { ResultsComponent } from './results/results.component';
 import { MapComponent } from './map/map.component';
 import { SearchComponent } from './search/search.component';
 import { BsDatepickerModule, BsDropdownModule, ButtonsModule } from 'ngx-bootstrap';
+import { StarRatingModule } from 'angular-star-rating';
 
 import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common'
 
@@ -40,7 +41,7 @@ import { HashLocationStrategy, Location, LocationStrategy } from '@angular/commo
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     ButtonsModule.forRoot(),
-
+    StarRatingModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: environment.GOOGLE_MAPS_API_KEY,
       libraries: ["places"]
