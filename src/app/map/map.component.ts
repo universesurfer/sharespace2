@@ -12,6 +12,8 @@ export class MapComponent implements OnInit {
 
   private results: any;
 
+  private entries: Array<Object> = [];
+
   latitude: number;
   longitude: number;
 
@@ -36,6 +38,7 @@ export class MapComponent implements OnInit {
     this.homeAwayService.currentResults.subscribe(results => this.results = results)
     this.latitude = Number(this.results.params.centerPointLatitude)
     this.longitude = Number(this.results.params.centerPointLongitude)
+    this.entries = this.results.results
     console.log("getting current results in map Component", this.results)
     this.getRentalCoordinatesAsNumber(this.results)
     console.log("getting coordinates from entries", this.coordinates)

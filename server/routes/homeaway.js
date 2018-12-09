@@ -34,7 +34,12 @@ router.get('/searchListings', (req,res,next)  => {
       // centerPointLatitude + Longitude uses a proximity search to limit results to listings located within a max distance from a specific location, must be sent with centerPointLatitude and centerPointLongitude
     }
 
-    axios.get(searchURL, options, params)
+    let config = {
+      headers: {'Authorization': 'Bearer ' + token },
+      params: params
+    }
+
+    axios.get(searchURL, config)
       .then(function (response) {
         console.log('Successful HomeAway search in server /search', response);
         res.send(response.data); //Send data
