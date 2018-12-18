@@ -28,7 +28,8 @@ export class ResultsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private homeAwayService: HomeawayService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -54,6 +55,18 @@ export class ResultsComponent implements OnInit {
   this.dataPresent = true;
   console.log("newResults() function is firing")
 }
+
+
+//Navigate to RentalComponent
+getIndividualRental(listingId) {
+  console.log("the listing id", listingId)
+  this.router.navigate(['/rental'],
+    { queryParams: {
+      listingId: listingId
+    }
+  })
+}
+
 
 
 

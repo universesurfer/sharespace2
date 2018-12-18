@@ -13,11 +13,11 @@
           <img src="{{listing.thumbnail.uri}}" alt="">
         </div>
         <div class="listingStatsWrapper">
-          <div class="listingTitle"><h4>{{listing.headline}}</h4></div>
+          <div class="listingTitle" (click)="getIndividualRental(listing.listingId)"><h4>{{listing.headline}}</h4></div>
           <div class="listingStats">{{listing.accommodations}}</div>
 
           <div class="listingPriceRatingWrapper">
-            <div class="listingPrice">{{listing.priceQuote.averageNightly}}</div>
+            <div class="listingPrice">{{listing.priceQuote?.averageNightly}}</div>
             <div class="listingRating">
               <star-rating size="medium" [starType]="icon" [rating]="listing.reviewAverage" [readOnly]="true"></star-rating>
                ({{listing.reviewCount}})

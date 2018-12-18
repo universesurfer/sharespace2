@@ -8,14 +8,10 @@ var mongoose = require('mongoose');
 
 const token = process.env.ACCESS_TOKEN;  //HomeAway token from .env
 
+let header = {'Authorization': 'Bearer ' + token }
+
 let searchURL = 'https://ws.homeaway.com/public/search'
-
-let options = {
-  method: 'GET',
-  headers: {'Authorization': 'Bearer ' + token },
-  dataType: 'json'
-};
-
+let listingURL = 'https://ws.homeaway.com/public/listing'
 
 // NOTE: Add error handling to requests
 
@@ -35,7 +31,7 @@ router.get('/searchListings', (req,res,next)  => {
     }
 
     let config = {
-      headers: {'Authorization': 'Bearer ' + token },
+      headers: header,
       params: params
     }
 
@@ -52,6 +48,34 @@ router.get('/searchListings', (req,res,next)  => {
       // });
 
   });
+
+  router.get('/rentalDetails', (req, res, next) => {
+
+      console.log("getting params in route?", req.query.listingId)
+
+      let params = {
+        id: req.query.listingId
+      }
+
+      let config = {
+        headers: header,
+        params: params
+      }
+
+      axios.get(listingURL, config)
+        .then(function (response) {
+          console.log('Getting single rental details', response);
+          res.send(response.data); //Send data
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+
+  });
+
+
+
+
 
 
 

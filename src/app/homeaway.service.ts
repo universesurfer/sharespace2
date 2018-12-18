@@ -57,5 +57,35 @@ export class HomeawayService {
   }
 
 
+  //Get details for individual rental
+  getListingDetails(rentalParams) {
+    console.log("getting listing details in getListingDetails()", rentalParams)
+
+    //Grab all of the params from the trip argument and append them to params variable
+    let params = new HttpParams()
+    Object.keys(rentalParams).forEach(function (key) {
+     params = params.append(key, rentalParams[key]);
+    });
+
+
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+
+    const options = {
+      headers: headers,
+      params: params
+    }
+
+    return this.http.get('/homeaway/rentalDetails', options)
+    .pipe(
+      map((res: Response) => res),
+      catchError(error => throwError(error.message || error))
+    )
+
+  }
+
+
+
+
 
 }

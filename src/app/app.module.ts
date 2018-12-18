@@ -19,7 +19,8 @@ import { SearchComponent } from './search/search.component';
 import { BsDatepickerModule, BsDropdownModule, ButtonsModule } from 'ngx-bootstrap';
 import { StarRatingModule } from 'angular-star-rating';
 
-import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common'
+import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
+import { RentalComponent } from './rental/rental.component'
 
 
 
@@ -29,7 +30,8 @@ import { HashLocationStrategy, Location, LocationStrategy } from '@angular/commo
     MainComponent,
     ResultsComponent,
     MapComponent,
-    SearchComponent
+    SearchComponent,
+    RentalComponent
   ],
   imports: [
     BrowserModule,

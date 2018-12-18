@@ -32,7 +32,7 @@ app.use(logger('dev'));
 
 //Parsers for POST data
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
