@@ -1,0 +1,17 @@
+
+#carouselWrapper {
+  width: 60%;
+}
+
+#photoGallery {
+  height: 500px;
+  width: 60%;
+  border: 1px solid black;
+}
+
+//NEED TO MAKE THIS RESPONSIVE/DYNAMIC SIZING
+img {
+ max-width: 100%;
+ max-height: 500px;
+ object-fit: cover;
+}

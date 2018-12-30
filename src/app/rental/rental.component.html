@@ -1,3 +1,29 @@
 <p>
   rental works!
 </p>
+
+
+<div class="container-fluid">
+  <div class="row">
+
+  <!-- <div id="carouselWrapper"> -->
+    <div id="photoGallery">
+      <carousel [interval]="myInterval" [(activeSlide)]="activeSlideIndex">
+
+        <slide *ngFor="let slide of photos; let index=index">
+          <img [src]="slide.large.uri" alt="image slide" style="display: block; width: 100%;">
+
+          <div class="carousel-caption">
+            <!-- <h4>Slide {{index}}</h4> -->
+            <p>{{slide.text}}</p>
+          </div>
+        </slide>
+      </carousel>
+</div>
+
+
+    <div id="rentalDetails">
+
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@ const token = process.env.ACCESS_TOKEN;  //HomeAway token from .env
 let header = {'Authorization': 'Bearer ' + token }
 
 let searchURL = 'https://ws.homeaway.com/public/search'
-let listingURL = 'https://ws.homeaway.com/public/listing'
+// let listingURL = `https://ws.homeaway.com/public/listing?listingId=${}`
 
 // NOTE: Add error handling to requests
 
@@ -35,6 +35,7 @@ router.get('/searchListings', (req,res,next)  => {
       params: params
     }
 
+
     axios.get(searchURL, config)
       .then(function (response) {
         console.log('Successful HomeAway search in server /search', response);
@@ -43,23 +44,19 @@ router.get('/searchListings', (req,res,next)  => {
       .catch(function (error) {
         console.log(error);
       })
-      // .then(function () {
-      //   // always executed
-      // });
 
   });
 
   router.get('/rentalDetails', (req, res, next) => {
 
-      console.log("getting params in route?", req.query.listingId)
+    let listingId = req.query.listingId
+    let listingURL = `https://ws.homeaway.com/public/listing?id=${listingId}&q=AVAILABILITY&q=DETAILS&q=LOCATION&q=PHOTOS&q=RATES&q=REVIEWS`
 
-      let params = {
-        id: req.query.listingId
-      }
+      console.log("getting params in route?", req.query)
+
 
       let config = {
-        headers: header,
-        params: params
+        headers: header
       }
 
       axios.get(listingURL, config)

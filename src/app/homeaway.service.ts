@@ -58,14 +58,14 @@ export class HomeawayService {
 
 
   //Get details for individual rental
-  getListingDetails(rentalParams) {
-    console.log("getting listing details in getListingDetails()", rentalParams)
+  getListingDetails(listingId) {
+    console.log("getting listing details in getListingDetails()", listingId)
 
     //Grab all of the params from the trip argument and append them to params variable
-    let params = new HttpParams()
-    Object.keys(rentalParams).forEach(function (key) {
-     params = params.append(key, rentalParams[key]);
-    });
+    let params = listingId
+    // Object.keys(rentalParams).forEach(function (key) {
+    //  params = params.append(key, rentalParams[key]);
+    // });
 
 
     const headers = new HttpHeaders()

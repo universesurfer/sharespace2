@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HomeawayService } from '../homeaway.service';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
+// import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @Component({
   selector: 'app-rental',
@@ -11,8 +12,11 @@ import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 })
 export class RentalComponent implements OnInit {
 
-  detailParams: any;
   listingDetails: any;
+  photos: array<object>;
+
+  activeSlideIndex = 0; //Start slideshow at first photo
+  myInterval = 0; //Turns off auto scrolling
 
   constructor(
     private http: HttpClient,
@@ -25,11 +29,11 @@ export class RentalComponent implements OnInit {
   ngOnInit() {
 
     //Query params-based search on page init
-    this.activatedRoute.queryParams.subscribe(params => {
-         console.log('rental detail params', params)
-         // this.detailParams = params
-         this.homeAwayService.getListingDetails(params).subscribe(res => {
-             // this.listingDetails = res
+    this.activatedRoute.queryParams.subscribe(listingId => {
+         console.log('rental detail params', listingId)
+         this.homeAwayService.getListingDetails(listingId).subscribe(res => {
+             this.photos = res.photos.photos
+             this.listingDetails = res
              console.log("response in activatedRoute in rental details", res)
          });
     })

@@ -17,6 +17,7 @@ import { ResultsComponent } from './results/results.component';
 import { MapComponent } from './map/map.component';
 import { SearchComponent } from './search/search.component';
 import { BsDatepickerModule, BsDropdownModule, ButtonsModule } from 'ngx-bootstrap';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { StarRatingModule } from 'angular-star-rating';
 
 import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
@@ -42,6 +43,7 @@ import { RentalComponent } from './rental/rental.component'
     routing,
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
+    CarouselModule.forRoot(),
     ButtonsModule.forRoot(),
     StarRatingModule.forRoot(),
     AgmCoreModule.forRoot({
