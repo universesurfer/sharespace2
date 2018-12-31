@@ -20,7 +20,7 @@
             <div class="listingPrice">{{listing.priceQuote?.averageNightly}}</div>
             <div class="listingRating">
               <star-rating size="medium" [starType]="icon" [rating]="listing.reviewAverage" [readOnly]="true"></star-rating>
-               ({{listing.reviewCount}})
+               {{listing.reviewCount}}
             </div>
           </div>
 

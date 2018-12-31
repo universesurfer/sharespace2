@@ -6,24 +6,86 @@
 <div class="container-fluid">
   <div class="row">
 
-  <!-- <div id="carouselWrapper"> -->
-    <div id="photoGallery">
-      <carousel [interval]="myInterval" [(activeSlide)]="activeSlideIndex">
+    <div class="left-column">
+      <div id="photoGallery">
+        <carousel [interval]="myInterval" [(activeSlide)]="activeSlideIndex">
 
-        <slide *ngFor="let slide of photos; let index=index">
-          <img [src]="slide.large.uri" alt="image slide" style="display: block; width: 100%;">
+          <slide *ngFor="let slide of photos; let index=index">
+            <img [src]="slide.large.uri" alt="image slide" style="display: block; width: 100%;">
 
-          <div class="carousel-caption">
-            <!-- <h4>Slide {{index}}</h4> -->
-            <p>{{slide.text}}</p>
+            <div class="carousel-caption">
+              <!-- <h4>Slide {{index}}</h4> -->
+              <p>{{slide.text}}</p>
+            </div>
+          </slide>
+        </carousel>
+      </div>
+
+
+      <div id="detailNav">
+        <ul class="nav nav-underline">
+          <li> <a href="">Overview</a> </li>
+          <li> <a href="">Amenities</a> </li>
+          <li> <a href="">Reviews</a> </li>
+          <li> <a href="">Map</a> </li>
+        </ul>
+      </div>
+
+      <h2>{{listingDetails.adContent.headline}}</h2>
+      <section id="overview">
+        <div class="listing-details-container">
+          <div class="row">
+            <div class="col">
+              <ul class="detail-list">
+                <li>
+                  <span>{{listingDetails?.units[0]?.unitContent.propertyType}}</span>
+                  <span></span>
+                </li>
+                <li>
+                  <span> Sleeps: {{listingDetails?.units[0]?.unitContent.maxSleep}} </span>
+                </li>
+                <li>
+                  <span> Bedrooms: {{listingDetails?.units[0]?.unitContent.numberOfBedrooms}} </span>
+                </li>
+                <li>
+                  <span> Bathrooms: {{listingDetails?.units[0]?.unitContent.numberOfBathrooms}} </span>
+                </li>
+                <li>
+                  <span> Min Stay: {{listingDetails?.units[0]?.ratePeriods[0].minimumStay}} nights</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col">
+              <agm-map [zoom]='13' [latitude]="coordinates.lat" [longitude]="coordinates.lng">
+                <agm-marker [latitude]="coordinates.lat" [longitude]="coordinates.lng"></agm-marker>
+              </agm-map>
+            </div>
           </div>
-        </slide>
-      </carousel>
-</div>
 
-
-    <div id="rentalDetails">
+        </div>
+      </section>
 
     </div>
+
+
+
+
+
+
+    <div class="right-column">
+      <div id="rentalDetails">
+
+        <div id="price"> {{listingDetails?.units[0]?.ratePeriods[0]?.rates.nightlyWeekday.amount | currency: listingDetails?.units[0]?.ratePeriods[0]?.rates.nightlyWeekday.currency}}</div>
+
+        <div class="reviewStars">
+          <star-rating size="medium" [starType]="icon" [rating]="listingDetails?.units[0]?.reviewSummary.averageRating" [readOnly]="true"></star-rating>
+          {{listingDetails?.units[0]?.reviewSummary.reviewCount}}
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </div>
+
+<!-- <p>Price = {{ price | currency : "NOK" }}</p> -->

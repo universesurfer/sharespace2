@@ -13,7 +13,8 @@ import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 export class RentalComponent implements OnInit {
 
   listingDetails: any;
-  photos: array<object>;
+  private photos: array<object>;
+  private coordinates: object;
 
   activeSlideIndex = 0; //Start slideshow at first photo
   myInterval = 0; //Turns off auto scrolling
@@ -33,6 +34,8 @@ export class RentalComponent implements OnInit {
          console.log('rental detail params', listingId)
          this.homeAwayService.getListingDetails(listingId).subscribe(res => {
              this.photos = res.photos.photos
+             this.coordinates = res.location
+             
              this.listingDetails = res
              console.log("response in activatedRoute in rental details", res)
          });
