@@ -1,14 +1,25 @@
+%space-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.row {
+  margin-bottom: 25px;
+}
+
 
 .left-column {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 60%;
+  overflow: auto;
 }
 
 #photoGallery {
   height: 500px;
-  // width: 60%;
+  width: 100%;
   border: 1px solid black;
 }
 
@@ -31,9 +42,7 @@ img {
 }
 
 .nav-underline {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  @extend %space-around;
   height: 60px;
   font-size: 16px;
 }
@@ -48,3 +57,32 @@ agm-map {
   height: 100%;
   width: 100%;
 }
+
+#listing-description {
+  height: 200px;
+  overflow: hidden;
+  // border-bottom: 1px solid black;
+}
+
+
+#listing-bedroom-stats {
+  flex-direction: column;
+
+}
+
+#bedroom-list {
+}
+
+#view-more {
+  display: inline;
+}
+
+#view-less {
+  display: none;
+}
+
+// #listing-features {
+//   @extend %space-around;
+//   border-top: 1px solid black;
+//   border-bottom: 1px solid black;
+// }

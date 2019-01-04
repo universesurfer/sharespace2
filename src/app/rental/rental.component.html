@@ -31,8 +31,9 @@
         </ul>
       </div>
 
-      <h2>{{listingDetails.adContent.headline}}</h2>
+
       <section id="overview">
+        <h2>{{listingDetails.adContent.headline}}</h2>
         <div class="listing-details-container">
           <div class="row">
             <div class="col">
@@ -56,11 +57,58 @@
               </ul>
             </div>
             <div class="col">
-              <agm-map [zoom]='13' [latitude]="coordinates.lat" [longitude]="coordinates.lng">
-                <agm-marker [latitude]="coordinates.lat" [longitude]="coordinates.lng"></agm-marker>
+              <agm-map [zoom]='13' [latitude]="coordinates?.lat" [longitude]="coordinates?.lng" [draggable]="false">
+                <agm-marker [latitude]="coordinates?.lat" [longitude]="coordinates?.lng"></agm-marker>
               </agm-map>
             </div>
           </div>
+
+          <!-- <div id="listing-features">
+            <span *ngFor="let feature of features"> {{feature.description}} </span>
+          </div> -->
+
+
+
+          <div class="row">
+            <div id="listing-description">
+              <h2>{{listingDetails?.adContent?.accommodationsSummary}}</h2>
+              <p id="description-text">{{listingDetails?.adContent?.description}}</p>
+            </div>
+            <button *ngIf="isCollapsed && textExceedsDivHeight" (click)="toggleText()" style="margin-top: 0">View more</button>
+            <button *ngIf="!isCollapsed && textExceedsDivHeight" (click)="toggleText()" style="margin-top: 0">View less</button>
+          </div>
+
+          <div class="row">
+            <div id="listing-bedroom-stats">
+              <h2>Bedrooms</h2>
+              <ul id="bedroom-list">
+                <li>
+                  <span> {{listingDetails?.units[0].unitContent?.numberOfBedrooms}} Bedrooms </span>
+                </li>
+                <li>
+                  <span> Sleeps {{listingDetails?.units[0].unitContent?.maxSleep}} </span>
+                </li>
+              </ul>
+              <hr>
+              <small>{{listingDetails?.units[0].unitContent?.bedroomDetails}}</small>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div id="listing-rules">
+              <h3>House Rules</h3>
+
+              <!-- <span>{{feature}}: {{features["suitability"]}}</span> -->
+
+
+              <!-- "let key of objectKeys(items)">{{key + ' : ' + items[key]}} -->
+
+
+
+            </div>
+          </div>
+
 
         </div>
       </section>
