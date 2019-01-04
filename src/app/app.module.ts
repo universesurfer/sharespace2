@@ -21,7 +21,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { StarRatingModule } from 'angular-star-rating';
 
 import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
-import { RentalComponent } from './rental/rental.component'
+import { RentalComponent } from './rental/rental.component';
 
 
 
