@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HomeawayService } from '../homeaway.service';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 // import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @Component({
@@ -31,6 +32,13 @@ export class RentalComponent implements OnInit, AfterViewChecked {
     reviews: []
   }
 
+  private currentPageArray: array<object> = []
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.currentPageArray = this.reviews.reviews.slice(startItem, endItem);
+  }
 
   activeSlideIndex = 0; //Start slideshow at first photo
   myInterval = 0; //Turns off auto scrolling
@@ -58,10 +66,13 @@ export class RentalComponent implements OnInit, AfterViewChecked {
              this.reviews.reviewSummary = res.units[0].reviewSummary
              this.reviews.reviews = res.units[0].unitReviewContent.entries
              this.listingDetails = res
+             this.currentPageArray = this.reviews.reviews.slice(0, 10);
              console.log("response in activatedRoute in rental details", res)
              console.log("reviews", this.reviews)
+             console.log("coordinates", this.coordinates)
          });
     })
+
 
 
 

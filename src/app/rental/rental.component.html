@@ -24,9 +24,9 @@
 
       <div id="detailNav">
         <ul class="nav nav-underline">
-          <li> <a href="">Overview</a> </li>
-          <li> <a href="">Amenities</a> </li>
-          <li> <a href="">Reviews</a> </li>
+          <li> <a href="#overview">Overview</a> </li>
+          <li> <a href="#amenities">Amenities</a> </li>
+          <li> <a href="#reviews">Reviews</a> </li>
           <li> <a href="">Map</a> </li>
         </ul>
       </div>
@@ -107,6 +107,7 @@
 
       <section id="amenities">
         <h2>Amenities</h2>
+        <hr>
         <div id="listing-amenities-container">
           <div class="row">
             <div class="col">
@@ -117,7 +118,7 @@
                 </ul>
               </div>
               <hr>
-              <div id="kitchen-amenities" *ngIf="features.kitchen">
+              <div id="kitchen-amenities" class="space-around-items" *ngIf="features.kitchen">
                 <h4>Kitchen</h4>
                 <ul>
                   <li *ngFor="let feature of features.kitchen"> {{feature.localizedName}}</li>
@@ -161,11 +162,12 @@
         <div id="averageRating">
             <rating [(ngModel)]="reviews.reviewSummary.averageRating" [max]="5" [readonly]="true"></rating>
             <!-- <star-rating size="medium" [starType]="icon" [rating]="reviews.reviewSummary.averageRating" [readOnly]="true"></star-rating> -->
-          <span><em>{{reviews.reviewSummary.averageRating}}/5</em></span>
+          <span><em>{{reviews.reviewSummary.averageRating | number:'1.2-2'}}/5</em></span>
         </div>
 
 
-        <div id="listing-reviews-container" *ngFor="let review of reviews.reviews">
+        <!-- <div id="listing-reviews-container" *ngFor="let review of reviews.reviews"> -->
+        <div id="listing-reviews-container" *ngFor="let review of currentPageArray">
           <div class="row">
             <div class="col">
               <div class="reviewCard">
@@ -179,7 +181,20 @@
               </div>
               <hr>
 
+            </div>
+          </div>
+        </div>
+        <pagination [totalItems]="reviews.reviews.length" (pageChanged)="pageChanged($event)"></pagination>
+      </section>
 
+      <section id="map">
+        <h2>Map</h2>
+        <div id="listing-map-container">
+          <div class="row">
+            <div class="col">
+              <agm-map [zoom]='13' [latitude]="coordinates?.lat" [longitude]="coordinates?.lng" [draggable]="false">
+                <agm-marker [latitude]="coordinates?.lat" [longitude]="coordinates?.lng"></agm-marker>
+              </agm-map>
             </div>
           </div>
         </div>
