@@ -46,10 +46,19 @@
 //   width: 50px;
 // }
 
-app-map {
+#map {
   width: 50%;
   height: 100%;
+  // position: -webkit-sticky;  // required for Safari
+  // position: sticky;
+  // top: 0; // required as well.
 }
+
+app-map {
+  width: auto;
+  height: auto;
+}
+
 
 .listingPhoto {
   width: 35%;

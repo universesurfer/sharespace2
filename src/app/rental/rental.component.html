@@ -34,7 +34,7 @@
 
       <section id="overview">
         <h2>{{listingDetails.adContent.headline}}</h2>
-        <div class="listing-details-container">
+        <div id="listing-details-container">
           <div class="row">
             <div class="col">
               <ul class="detail-list">
@@ -95,27 +95,101 @@
           </div>
 
 
-          <div class="row">
+          <!-- <div class="row">
             <div id="listing-rules">
               <h3>House Rules</h3>
-
-              <!-- <span>{{feature}}: {{features["suitability"]}}</span> -->
-
-
-              <!-- "let key of objectKeys(items)">{{key + ' : ' + items[key]}} -->
-
-
-
             </div>
-          </div>
+          </div> -->
 
 
         </div>
       </section>
 
+      <section id="amenities">
+        <h2>Amenities</h2>
+        <div id="listing-amenities-container">
+          <div class="row">
+            <div class="col">
+              <div id="general-amenities" *ngIf="features.general">
+                <h4>General</h4>
+                <ul>
+                  <li *ngFor="let feature of features.general"> {{feature.localizedName}}</li>
+                </ul>
+              </div>
+              <hr>
+              <div id="kitchen-amenities" *ngIf="features.kitchen">
+                <h4>Kitchen</h4>
+                <ul>
+                  <li *ngFor="let feature of features.kitchen"> {{feature.localizedName}}</li>
+                </ul>
+              </div>
+              <hr>
+              <div id="entertainment-amenities" *ngIf="features.entertainment">
+                <h4>Entertainment</h4>
+                <ul>
+                  <li *ngFor="let feature of features.entertainment"> {{feature.localizedName}}</li>
+                </ul>
+              </div>
+              <hr>
+              <div id="outside-amenities" *ngIf="features.outside">
+                <h4>Outside</h4>
+                <ul>
+                  <li *ngFor="let feature of features.outside"> {{feature.localizedName}}</li>
+                </ul>
+              </div>
+              <hr>
+              <div id="suitability-amenities" *ngIf="features.suitability">
+                <h4>House Rules</h4>
+                <ul>
+                  <li *ngFor="let feature of features.suitability"> {{feature.localizedName}}</li>
+                </ul>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section id="reviews">
+        <!-- <h2>Reviews</h2> -->
+        <h2 *ngIf="reviews.reviewSummary.reviewCount === 1">{{reviews.reviewSummary.reviewCount}} Review</h2>
+        <h2 *ngIf="reviews.reviewSummary.reviewCount > 1">{{reviews.reviewSummary.reviewCount}} Reviews</h2>
+
+        <div id="averageRating">
+            <rating [(ngModel)]="reviews.reviewSummary.averageRating" [max]="5" [readonly]="true"></rating>
+            <!-- <star-rating size="medium" [starType]="icon" [rating]="reviews.reviewSummary.averageRating" [readOnly]="true"></star-rating> -->
+          <span><em>{{reviews.reviewSummary.averageRating}}/5</em></span>
+        </div>
+
+
+        <div id="listing-reviews-container" *ngFor="let review of reviews.reviews">
+          <div class="row">
+            <div class="col">
+              <div class="reviewCard">
+                <h4>{{review.headline}}</h4>
+                <span>{{review.rating}}/5</span>
+                <rating [(ngModel)]="review.rating" [max]="5" [readonly]="true"></rating>
+                <em>Stayed {{ review.arrivalDate | date: 'MMM d, y'}}</em>
+                <b>{{review.reviewerName}}</b>
+                <pre>{{review.body}}</pre>
+
+              </div>
+              <hr>
+
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
     </div>
-
-
 
 
 

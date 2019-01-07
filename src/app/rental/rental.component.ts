@@ -1,5 +1,5 @@
 'use strict';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HomeawayService } from '../homeaway.service';
@@ -16,12 +16,21 @@ export class RentalComponent implements OnInit, AfterViewChecked {
   listingDetails: any;
   private photos: Array<object>;
   private coordinates: object;
-  private features: Array<object>;
+  // private features: Array<object>;
 
-  private objectKeys = Object.keys
+  private features: FeatureList = {
+    general: [],
+    kitchen: [],
+    entertainment: [],
+    suitability: [],
+    outside: []
+  }
 
-  objectKeys = Object.keys;
-  items = { keyOne: 'value 1', keyTwo: 'value 2', keyThree: 'value 3' };
+  private reviews: Reviews = {
+    reviewSummary: {},
+    reviews: []
+  }
+
 
   activeSlideIndex = 0; //Start slideshow at first photo
   myInterval = 0; //Turns off auto scrolling
@@ -45,9 +54,12 @@ export class RentalComponent implements OnInit, AfterViewChecked {
          this.homeAwayService.getListingDetails(listingId).subscribe(res => {
              this.photos = res.photos.photos
              this.coordinates = res.location
-             this.features = res.units[0].unitContent.features
+             this.getFeatureByCategory(res.units[0].unitContent.features)
+             this.reviews.reviewSummary = res.units[0].reviewSummary
+             this.reviews.reviews = res.units[0].unitReviewContent.entries
              this.listingDetails = res
              console.log("response in activatedRoute in rental details", res)
+             console.log("reviews", this.reviews)
          });
     })
 
@@ -87,6 +99,37 @@ expand() {
   const descriptionElement = document.getElementById("listing-description")
   descriptionElement.style.height = "auto"
 }
+
+
+
+//Create New Object with Separated Listing Features By Category
+getFeatureByCategory(features) {
+
+  features.forEach((feature) {
+
+    let featureCategory = feature.category
+    switch (featureCategory) {
+      case "GENERAL":
+         this.features.general.push(feature)
+         break;
+      case "KITCHEN":
+          this.features.kitchen.push(feature)
+          break;
+      case "ENTERTAINMENT":
+          this.features.entertainment.push(feature)
+          break;
+      case "SUITABILITY":
+          this.features.suitability.push(feature)
+          break;
+      case "OUTSIDE":
+          this.features.outside.push(feature)
+
+      }
+  })
+  console.log("Showing feature list", this.features)
+}
+
+
 // toggleDescription() {
 //   const descriptionElement = document.getElementById("listing-description")
 //   const viewMoreButton = document.getElementById("view-more")
@@ -106,7 +149,17 @@ expand() {
 // }
 
 
+}
 
+interface FeatureList {
+  general: [],
+  kitchen: [],
+  entertainment: [],
+  suitability: [],
+  outside: []
+}
 
-
+interface Reviews {
+  reviewSummary: {},
+  reviews: []
 }

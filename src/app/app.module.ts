@@ -18,6 +18,8 @@ import { MapComponent } from './map/map.component';
 import { SearchComponent } from './search/search.component';
 import { BsDatepickerModule, BsDropdownModule, ButtonsModule } from 'ngx-bootstrap';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { RatingModule } from 'ngx-bootstrap/rating';
 import { StarRatingModule } from 'angular-star-rating';
 
 import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
@@ -42,9 +44,11 @@ import { RentalComponent } from './rental/rental.component';
     ReactiveFormsModule,
     routing,
     BsDatepickerModule.forRoot(),
+    RatingModule.forRoot(),
     BsDropdownModule.forRoot(),
     CarouselModule.forRoot(),
     ButtonsModule.forRoot(),
+    PaginationModule.forRoot(),
     StarRatingModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: environment.GOOGLE_MAPS_API_KEY,
