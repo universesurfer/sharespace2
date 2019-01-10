@@ -29,14 +29,22 @@
       </div>
 
 
+    <!-- <pagination [totalItems]="reviews.reviews.length" (pageChanged)="pageChanged($event)"></pagination> -->
+    <div class="next-previous-buttons">
+      <button class="previous round">&#8249;</button>
+      <button class="next round" (click)="showNextRentals()">&#8250;</button>
+      <!-- <a class="next round" [routerLink]="['/search']" queryParamsHandling="merge" queryParams="{page: 4}"></a> -->
+    </div>
 
     </div>
+
 
     <div id="map">
       <app-map *ngIf="dataPresent"></app-map>
     </div>
 
   </div>
+
 
     <!-- <div id="mapContainer"> -->
 

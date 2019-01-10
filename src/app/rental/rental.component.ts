@@ -32,6 +32,7 @@ export class RentalComponent implements OnInit, AfterViewChecked {
     reviews: []
   }
 
+  //Pagination of user reviews
   private currentPageArray: array<object> = []
 
   pageChanged(event: PageChangedEvent): void {
@@ -41,7 +42,7 @@ export class RentalComponent implements OnInit, AfterViewChecked {
   }
 
   activeSlideIndex = 0; //Start slideshow at first photo
-  myInterval = 0; //Turns off auto scrolling
+  myInterval = 0; //Turns off auto scrolling in gallery
 
   isCollapsed: boolean = true;
   textExceedsDivHeight: boolean = false;
@@ -82,10 +83,9 @@ export class RentalComponent implements OnInit, AfterViewChecked {
     this.showToggleButtons()
   }
 
-
+//Show toggle buttons if text exceeds div height
 showToggleButtons() {
   let descriptionText = document.getElementById("description-text").innerHTML
-  console.log(descriptionText.length)
   if (descriptionText.length > 500) {
     this.textExceedsDivHeight = true
   } else {
@@ -116,7 +116,7 @@ expand() {
 //Create New Object with Separated Listing Features By Category
 getFeatureByCategory(features) {
 
-  features.forEach((feature) {
+  features.forEach((feature) => {
 
     let featureCategory = feature.category
     switch (featureCategory) {
@@ -134,6 +134,7 @@ getFeatureByCategory(features) {
           break;
       case "OUTSIDE":
           this.features.outside.push(feature)
+          break;
 
       }
   })

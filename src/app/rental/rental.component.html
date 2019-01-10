@@ -27,7 +27,7 @@
           <li> <a href="#overview">Overview</a> </li>
           <li> <a href="#amenities">Amenities</a> </li>
           <li> <a href="#reviews">Reviews</a> </li>
-          <li> <a href="">Map</a> </li>
+          <li> <a href="#map">Map</a> </li>
         </ul>
       </div>
 
@@ -140,7 +140,7 @@
               </div>
               <hr>
               <div id="suitability-amenities" *ngIf="features.suitability">
-                <h4>House Rules</h4>
+                <h4>Suitability</h4>
                 <ul>
                   <li *ngFor="let feature of features.suitability"> {{feature.localizedName}}</li>
                 </ul>
@@ -172,9 +172,10 @@
             <div class="col">
               <div class="reviewCard">
                 <h4>{{review.headline}}</h4>
-                <span>{{review.rating}}/5</span>
+
+                <span>{{review.rating}}/5 </span>
                 <rating [(ngModel)]="review.rating" [max]="5" [readonly]="true"></rating>
-                <em>Stayed {{ review.arrivalDate | date: 'MMM d, y'}}</em>
+                <em> Stayed {{ review.arrivalDate | date: 'MMM d, y'}}</em><br>
                 <b>{{review.reviewerName}}</b>
                 <pre>{{review.body}}</pre>
 
@@ -184,7 +185,7 @@
             </div>
           </div>
         </div>
-        <pagination [totalItems]="reviews.reviews.length" (pageChanged)="pageChanged($event)"></pagination>
+        <pagination *ngIf="reviews.reviews.length > 10" [totalItems]="reviews.reviews.length" (pageChanged)="pageChanged($event)"></pagination>
       </section>
 
       <section id="map">

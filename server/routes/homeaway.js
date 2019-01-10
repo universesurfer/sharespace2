@@ -26,7 +26,8 @@ router.get('/searchListings', (req,res,next)  => {
       centerPointLatitude: req.query.centerPointLatitude,
       centerPointLongitude: req.query.centerPointLongitude,
       distanceInKm: req.query.distanceInKm,
-      imageSize: req.query.imageSize
+      imageSize: req.query.imageSize,
+      page: req.query.page
       // centerPointLatitude + Longitude uses a proximity search to limit results to listings located within a max distance from a specific location, must be sent with centerPointLatitude and centerPointLongitude
     }
 
@@ -69,6 +70,14 @@ router.get('/searchListings', (req,res,next)  => {
         })
 
   });
+
+
+  router.get('/newListingPage', (req, res, next) => {
+
+    console.log("SHOW SOMETHING IN NAVIGATELISTINGS!", req)
+
+
+  })
 
 
 

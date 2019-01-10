@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
+
 // IDEA: Cache data from API to prevent repeated calls
 
 @Injectable({
@@ -77,6 +78,30 @@ export class HomeawayService {
     }
 
     return this.http.get('/homeaway/rentalDetails', options)
+    .pipe(
+      map((res: Response) => res),
+      catchError(error => throwError(error.message || error))
+    )
+
+  }
+
+
+  navigateListingPage(page) {
+    console.log("getting page number navigateListingPage", page)
+
+    let pageNumber = page
+
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+
+    // let params = new HttpParams()
+
+    const options = {
+      headers: headers,
+      params: pageNumber
+    }
+
+    return this.http.get('/homeaway/newListingPage', options)
     .pipe(
       map((res: Response) => res),
       catchError(error => throwError(error.message || error))

@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HomeawayService } from '../homeaway.service';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -24,12 +26,19 @@ export class ResultsComponent implements OnInit {
     params: this.searchParams
   }
 
+  private pageCount: string = ''
+  private nextPage: string = ''
+  private previousPage: string = ''
+  private currentPage: string = ''
+
+
 
   constructor(
     private http: HttpClient,
     private homeAwayService: HomeawayService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -39,9 +48,16 @@ export class ResultsComponent implements OnInit {
          console.log('params', params)
          this.resultsAndParams.params = params
          this.homeAwayService.searchListings(params).subscribe(res => {
+             console.log("RESPONSE", res)
              this.resultsAndParams.results = res["entries"]
+             this.nextPage = res["nextPage"]
+             this.previousPage = res["prevPage"]
+             this.currentPage = res["page"]
+             this.pageCount = res["pageCount"]
              this.newResults(this.resultsAndParams)
              console.log("response in activatedRoute in results", this.resultsAndParams)
+             console.log("current page", this.currentPage)
+             console.log("next page", this.nextPage)
          });
   })
 
@@ -67,7 +83,36 @@ getIndividualRental(listingId) {
   })
 }
 
+showNextRentals() {
 
+  let pageCount = this.pageCount
+  let currentPage = this.currentPage
+  let nextPage
+
+  if (currentPage < pageCount) {
+    nextPage = currentPage + 1
+    // this.homeAwayService.navigateListingPage(nextPage)
+    console.log("inside showNextRentals()", nextPage)
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: { page: nextPage },
+        queryParamsHandling: "merge"
+      });
+
+  } else {
+    return false
+  }
+
+
+
+}
+
+
+showLessRentals() {
+
+}
 
 
 
