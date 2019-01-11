@@ -40,7 +40,10 @@
 
 
     <div id="map">
-      <app-map *ngIf="dataPresent"></app-map>
+      <!-- <app-map *ngIf="dataPresent"></app-map> -->
+      <agm-map *ngIf="dataPresent" [zoom]='12' [latitude]="latitude" [longitude]="longitude">
+        <agm-marker *ngFor="let location of resultsAndParams.results; let i = index" [latitude]="location.location.lat" [longitude]="location.location.lng"></agm-marker>
+      </agm-map>
     </div>
 
   </div>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HomeawayService } from '../homeaway.service';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -16,6 +17,9 @@ export class ResultsComponent implements OnInit {
 
   public searchResults: any;
   public searchParams: Object;
+  private latitude: number;
+  private longitude: number;
+
 
 
   private dataPresent: boolean;
@@ -49,6 +53,9 @@ export class ResultsComponent implements OnInit {
          this.resultsAndParams.params = params
          this.homeAwayService.searchListings(params).subscribe(res => {
              console.log("RESPONSE", res)
+             this.latitude = Number(this.resultsAndParams.params.centerPointLatitude)
+             this.longitude = Number(this.resultsAndParams.params.centerPointLongitude)
+
              this.resultsAndParams.results = res["entries"]
              this.nextPage = res["nextPage"]
              this.previousPage = res["prevPage"]
@@ -67,8 +74,8 @@ export class ResultsComponent implements OnInit {
 
 // Update BehaviorSubject when data changes and subscribe it to local variable OnInit
  newResults(data) {
-  this.homeAwayService.updateResults(data)
   this.dataPresent = true;
+  this.homeAwayService.updateResults(data)
   console.log("newResults() function is firing")
 }
 
