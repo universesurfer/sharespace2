@@ -1,55 +1,65 @@
-<p>
+<!-- <p>
   results works!
-</p>
+</p> -->
+<app-nav></app-nav>
+<app-search></app-search>
 
 <div class="container-fluid">
-  <div id="resultsRow">
+  <div class="row">
+      <div class="col-md-7">
+      <div id="resultsRow">
 
-    <!-- Show our HomeAway listings -->
-    <div id="listingsBox"> listing box
+        <!-- Show our HomeAway listings -->
+        <div id="listingsBox"> listing box
 
-      <div class="listingCardWrapper" *ngFor="let listing of resultsAndParams.results">
-        <div class="listingPhoto">
-          <img src="{{listing.thumbnail.uri}}" alt="">
-        </div>
-        <div class="listingStatsWrapper">
-          <div class="listingTitle" (click)="getIndividualRental(listing.listingId)"><h4>{{listing.headline}}</h4></div>
-          <div class="listingStats">{{listing.accommodations}}</div>
-
-          <div class="listingPriceRatingWrapper">
-            <div class="listingPrice">{{listing.priceQuote?.averageNightly}}</div>
-
-            <div class="listingRating">
-              <star-rating size="medium" [starType]="icon" [rating]="listing.reviewAverage" [readOnly]="true"></star-rating>
-               {{listing.reviewCount}}
+          <div class="listingCardWrapper" *ngFor="let listing of resultsAndParams.results">
+            <div class="listingPhoto">
+              <img src="{{listing.thumbnail.uri}}" alt="">
             </div>
+            <div class="listingStatsWrapper">
+              <div class="listingTitle" (click)="getIndividualRental(listing.listingId)">
+                <h4>{{listing.headline}}</h4>
+              </div>
+              <div class="listingStats">{{listing.accommodations}}</div>
+
+              <div class="listingPriceRatingWrapper">
+                <div class="listingPrice">{{listing.priceQuote?.averageNightly}}</div>
+
+                <div class="listingRating">
+                  <star-rating size="medium" [starType]="icon" [rating]="listing.reviewAverage" [readOnly]="true"></star-rating>
+                  {{listing.reviewCount}}
+                </div>
+              </div>
+          </div>
           </div>
 
+
+
+          <!-- <pagination [totalItems]="reviews.reviews.length" (pageChanged)="pageChanged($event)"></pagination> -->
+          <div *ngIf="dataPresent" class="next-previous-buttons">
+            <button class="previous round" (click)="showPreviousRentals()">&#8249;</button>
+            <button class="next round" (click)="showNextRentals()">&#8250;</button>
+            <!-- <a class="next round" [routerLink]="['/search']" queryParamsHandling="merge" queryParams="{page: 4}"></a> -->
+          </div>
+
+        </div>
         </div>
       </div>
 
 
-    <!-- <pagination [totalItems]="reviews.reviews.length" (pageChanged)="pageChanged($event)"></pagination> -->
-    <div class="next-previous-buttons">
-      <button class="previous round">&#8249;</button>
-      <button class="next round" (click)="showNextRentals()">&#8250;</button>
-      <!-- <a class="next round" [routerLink]="['/search']" queryParamsHandling="merge" queryParams="{page: 4}"></a> -->
-    </div>
+      <div class="col-md-5 sticky">
+      <div id="map">
+        <!-- <app-map *ngIf="dataPresent"></app-map> -->
+        <agm-map *ngIf="dataPresent" [zoom]='12' [latitude]="latitude" [longitude]="longitude">
+          <agm-marker *ngFor="let location of resultsAndParams.results; let i = index" [latitude]="location.location.lat" [longitude]="location.location.lng"></agm-marker>
+        </agm-map>
+      </div>
+      </div>
 
     </div>
 
 
-    <div id="map">
-      <!-- <app-map *ngIf="dataPresent"></app-map> -->
-      <agm-map *ngIf="dataPresent" [zoom]='12' [latitude]="latitude" [longitude]="longitude">
-        <agm-marker *ngFor="let location of resultsAndParams.results; let i = index" [latitude]="location.location.lat" [longitude]="location.location.lng"></agm-marker>
-      </agm-map>
-    </div>
+  <!-- <div id="mapContainer"> -->
 
-  </div>
-
-
-    <!-- <div id="mapContainer"> -->
-
-    <!-- </div> -->
+  <!-- </div> -->
 </div>

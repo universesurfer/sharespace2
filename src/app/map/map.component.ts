@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { HomeawayService } from '../homeaway.service';
 
@@ -7,7 +7,7 @@ import { HomeawayService } from '../homeaway.service';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit, OnChanges {
+export class MapComponent implements OnInit {
 
   private results: any;
 
@@ -37,14 +37,7 @@ export class MapComponent implements OnInit, OnChanges {
     // console.log("getting coordinates from entries", this.coordinates)
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // this.homeAwayService.currentResults.subscribe(results => this.results = results)
-    const results: SimpleChange = changes.entries;
-    console.log('prev value in map results: ', results.previousValue);
-    console.log('new values in map results: ', results.currentValue);
-    // this.results = results
-    // this.getRentalCoordinatesAsNumber(results)
-  }
+
 
   // ngOnDestroy() {
   //  //prevent memory leak when component destroyed

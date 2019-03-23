@@ -33,7 +33,7 @@ export class RentalComponent implements OnInit, AfterViewChecked {
   }
 
   //Pagination of user reviews
-  private currentPageArray: array<object> = []
+  private currentPageArray: Array<object> = []
 
   pageChanged(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
@@ -58,22 +58,22 @@ export class RentalComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
 
     //Query params-based search on page init
-    this.activatedRoute.queryParams.subscribe(listingId => {
-         console.log('rental detail params', listingId)
-         this.homeAwayService.getListingDetails(listingId).subscribe(res => {
-             this.photos = res.photos.photos
-             this.coordinates = res.location
-             this.getFeatureByCategory(res.units[0].unitContent.features)
-             this.reviews.reviewSummary = res.units[0].reviewSummary
-             this.reviews.reviews = res.units[0].unitReviewContent.entries
-             this.listingDetails = res
-             this.currentPageArray = this.reviews.reviews.slice(0, 10);
-             console.log("response in activatedRoute in rental details", res)
-             console.log("reviews", this.reviews)
-             console.log("coordinates", this.coordinates)
-         });
-    })
-
+    // this.activatedRoute.queryParams.subscribe(listingId => {
+    //      console.log('rental detail params', listingId)
+    //      this.homeAwayService.getListingDetails(listingId).subscribe(res => {
+    //          this.photos = res.photos.photos
+    //          this.coordinates = res.location
+    //          this.getFeatureByCategory(res.units[0].unitContent.features)
+    //          this.reviews.reviewSummary = res.units[0].reviewSummary
+    //          this.reviews.reviews = res.units[0].unitReviewContent.entries
+    //          this.listingDetails = res
+    //          this.currentPageArray = this.reviews.reviews.slice(0, 10);
+    //          console.log("response in activatedRoute in rental details", res)
+    //          console.log("reviews", this.reviews)
+    //          console.log("coordinates", this.coordinates)
+    //      });
+    // })
+    //
 
 
 
@@ -114,32 +114,32 @@ expand() {
 
 
 //Create New Object with Separated Listing Features By Category
-getFeatureByCategory(features) {
-
-  features.forEach((feature) => {
-
-    let featureCategory = feature.category
-    switch (featureCategory) {
-      case "GENERAL":
-         this.features.general.push(feature)
-         break;
-      case "KITCHEN":
-          this.features.kitchen.push(feature)
-          break;
-      case "ENTERTAINMENT":
-          this.features.entertainment.push(feature)
-          break;
-      case "SUITABILITY":
-          this.features.suitability.push(feature)
-          break;
-      case "OUTSIDE":
-          this.features.outside.push(feature)
-          break;
-
-      }
-  })
-  console.log("Showing feature list", this.features)
-}
+// getFeatureByCategory(features) {
+//
+//   features.forEach((feature) => {
+//
+//     let featureCategory = feature.category
+//     switch (featureCategory) {
+//       case "GENERAL":
+//          this.features.general.push(feature)
+//          break;
+//       case "KITCHEN":
+//           this.features.kitchen.push(feature)
+//           break;
+//       case "ENTERTAINMENT":
+//           this.features.entertainment.push(feature)
+//           break;
+//       case "SUITABILITY":
+//           this.features.suitability.push(feature)
+//           break;
+//       case "OUTSIDE":
+//           this.features.outside.push(feature)
+//           break;
+//
+//       }
+//   })
+//   console.log("Showing feature list", this.features)
+// }
 
 
 // toggleDescription() {

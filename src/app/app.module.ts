@@ -20,10 +20,14 @@ import { BsDatepickerModule, BsDropdownModule, ButtonsModule } from 'ngx-bootstr
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RatingModule } from 'ngx-bootstrap/rating';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { StarRatingModule } from 'angular-star-rating';
 
 import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
 import { RentalComponent } from './rental/rental.component';
+import { NavComponent } from './nav/nav.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 
@@ -34,7 +38,10 @@ import { RentalComponent } from './rental/rental.component';
     ResultsComponent,
     MapComponent,
     SearchComponent,
-    RentalComponent
+    RentalComponent,
+    NavComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +49,7 @@ import { RentalComponent } from './rental/rental.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ModalModule.forRoot(),
     routing,
     BsDatepickerModule.forRoot(),
     RatingModule.forRoot(),

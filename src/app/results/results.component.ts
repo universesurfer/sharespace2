@@ -16,7 +16,7 @@ import { AgmCoreModule } from '@agm/core';
 export class ResultsComponent implements OnInit {
 
   public searchResults: any;
-  public searchParams: Object;
+  public searchParams: object;
   private latitude: number;
   private longitude: number;
 
@@ -30,10 +30,8 @@ export class ResultsComponent implements OnInit {
     params: this.searchParams
   }
 
-  private pageCount: string = ''
-  private nextPage: string = ''
-  private previousPage: string = ''
-  private currentPage: string = ''
+  private pageCount: number
+  private currentPage: number
 
 
 
@@ -48,25 +46,23 @@ export class ResultsComponent implements OnInit {
   ngOnInit() {
 
     //Query params-based search on page init
-    this.activatedRoute.queryParams.subscribe(params => {
-         console.log('params', params)
-         this.resultsAndParams.params = params
-         this.homeAwayService.searchListings(params).subscribe(res => {
-             console.log("RESPONSE", res)
-             this.latitude = Number(this.resultsAndParams.params.centerPointLatitude)
-             this.longitude = Number(this.resultsAndParams.params.centerPointLongitude)
-
-             this.resultsAndParams.results = res["entries"]
-             this.nextPage = res["nextPage"]
-             this.previousPage = res["prevPage"]
-             this.currentPage = res["page"]
-             this.pageCount = res["pageCount"]
-             this.newResults(this.resultsAndParams)
-             console.log("response in activatedRoute in results", this.resultsAndParams)
-             console.log("current page", this.currentPage)
-             console.log("next page", this.nextPage)
-         });
-  })
+  //   this.activatedRoute.queryParams.subscribe(params => {
+  //        console.log('params', params)
+  //        this.resultsAndParams.params = params
+  //        this.homeAwayService.searchListings(params).subscribe(res => {
+  //            console.log("RESPONSE", res)
+  //            this.latitude = Number(this.resultsAndParams.params.centerPointLatitude)
+  //            this.longitude = Number(this.resultsAndParams.params.centerPointLongitude)
+  //
+  //            this.resultsAndParams.results = res["entries"]
+  //            this.currentPage = res["page"]
+  //            this.pageCount = res["pageCount"]
+  //            this.newResults(this.resultsAndParams)
+  //            console.log("response in activatedRoute in results", this.resultsAndParams)
+  //            console.log("current page", this.currentPage)
+  //
+  //        });
+  // })
 
 }
 
@@ -112,14 +108,31 @@ showNextRentals() {
     return false
   }
 
+}
 
+showPreviousRentals() {
+
+  let pageCount = this.pageCount
+  let currentPage = this.currentPage
+  let previousPage
+
+  if (currentPage > 1) {
+
+    previousPage = currentPage - 1
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: { page: previousPage },
+        queryParamsHandling: "merge"
+      });
+
+  } else {
+    return false
+  }
 
 }
 
-
-showLessRentals() {
-
-}
 
 
 
@@ -127,6 +140,6 @@ showLessRentals() {
 
 //Interface for results to expect results and params objects
 interface Results {
-  results: Object,
-  params: Object
+  results: object,
+  params: object
 }
