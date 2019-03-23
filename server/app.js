@@ -2,6 +2,17 @@ require('dotenv').config()
 var createError = require('http-errors');
 const cors = require('cors');
 var express = require('express');
+const session = require('express-session');
+// makes sending requests easy
+const request = require('request');
+// node core module, construct query string
+const qs = require('querystring');
+// node core module, parses url string into components
+const url = require('url');
+// generates a random string
+const randomString = require('randomstring');
+// random string, will be used in the workflow later
+const csrfString = randomString.generate();
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -14,6 +25,7 @@ const http = require('http');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var homeAwayRouter = require('./routes/homeaway');
+let oAuthRouter = require('./routes/oAuth');
 
 var app = express();
 
@@ -44,6 +56,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/homeaway', homeAwayRouter);
+app.use('/oAuth', oAuthRouter);
 
 
 //Catch all other routes and return the index file.
@@ -57,6 +70,35 @@ app.use('/homeaway', homeAwayRouter);
 // Get port from environment and store in Express
 const port = process.env.PORT || '3000';
 app.set('port', port);
+
+app.use(
+  session({
+    secret: randomString.generate(),
+    cookie: { maxAge: 60000 },
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+//Redirects user to HomeAway for Authentication
+app.get('/login', (req, res, next) => {
+    // generate that csrf_string for your "state" parameter
+  req.session.csrf_string = randomString.generate();
+    // construct the HomeAway URL you redirect your user to.
+    // qs.stringify is a method that creates foo=bar&bar=baz
+    // type of string for you.
+  const homeAwayAuthUrl =
+    'https://ws.homeaway.com/oauth/authorize?' +
+    qs.stringify({
+      client_id: process.env.CLIENT_ID,
+      // redirect_uri: redirect_uri,
+      state: req.session.csrf_string,
+      scope: 'user:email'
+    });
+  // redirect user with express
+  res.redirect(homeAwayAuthUrl);
+});
+
 
 // Create HTTP server
 const server = http.createServer(app);
